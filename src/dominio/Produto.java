@@ -2,7 +2,7 @@ package dominio;
 
 import java.time.LocalDate;
 
-public class Produto extends BaseParametro{
+public class Produto extends BaseParametro {
     private int codigoSubclasse;
     private double valor;
     public int getCodigoSubclasse() {

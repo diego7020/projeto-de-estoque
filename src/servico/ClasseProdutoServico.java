@@ -1,6 +1,7 @@
 package servico;
 
 import java.util.ArrayList;
+
 import dominio.ClasseProduto;
 import repositorio.ClasseProdutoRepo;
 
@@ -10,6 +11,7 @@ public class ClasseProdutoServico extends BaseServico<ClasseProduto> {
 
     public ClasseProdutoServico(){
         this.repositorio = new ClasseProdutoRepo();
+
     }
 
     @Override
@@ -37,6 +39,5 @@ public class ClasseProdutoServico extends BaseServico<ClasseProduto> {
         return this.repositorio.Delete(chave);
     }
     
-
 
 }

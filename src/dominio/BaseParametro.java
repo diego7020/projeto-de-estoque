@@ -1,7 +1,7 @@
 package dominio;
 
 import java.time.LocalDate;
-//TESTE
+
 public abstract class BaseParametro {
     protected int codigo;
     protected String descricao;
@@ -31,7 +31,5 @@ public abstract class BaseParametro {
         this.descricao = descricao;
         this.dataDeInclusao = dataDeInclusao;
     }
-    
-
     
 }
