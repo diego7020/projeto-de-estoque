@@ -39,8 +39,13 @@ public class FuncionarioRepositorio extends BaseRepositorio<Funcionario> {
 
     @Override
     public Funcionario Add(Funcionario instancia) {
-        Funcionario cp = this.dados.getLast();
-        int proxChave = cp.getCodigo() + 1;
+        int proxChave;
+        if (this.dados.size() == 0) {
+            proxChave = 1;
+        }else{
+            Funcionario cp = this.dados.getLast();
+            proxChave = cp.getCodigo() + 1;
+        }
         instancia.setCodigo(proxChave);
         this.dados.add(instancia);
         return instancia;
