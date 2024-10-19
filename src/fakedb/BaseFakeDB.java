@@ -19,14 +19,9 @@ public abstract class BaseFakeDB<TDominio> {
     public ArrayList<TDominio> getTabelaProduto(){
         return this.tabelaProduto;
     }
-    
-
-    //1 - metodos abstract nao podem ter codigo
-    //2 - metodos abstract devem ser implementados (ou codificados) nas classes filhas (reais)
-    //3 - este método deve ser executado toda a vez que a classe filha for i nstanciada
+        
     public abstract void preencherDados();
 
-    //construtor pro metodo acima preencherdados
     public BaseFakeDB(){
         this.preencherDados();
     }

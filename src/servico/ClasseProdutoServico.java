@@ -11,7 +11,6 @@ public class ClasseProdutoServico extends BaseServico<ClasseProduto> {
 
     public ClasseProdutoServico(){
         this.repositorio = new ClasseProdutoRepo();
-
     }
 
     @Override

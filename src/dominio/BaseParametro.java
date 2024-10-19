@@ -3,9 +3,11 @@ package dominio;
 import java.time.LocalDate;
 
 public abstract class BaseParametro {
+    
     protected int codigo;
     protected String descricao;
     protected LocalDate dataDeInclusao;
+    
     public int getCodigo() {
         return codigo;
     }

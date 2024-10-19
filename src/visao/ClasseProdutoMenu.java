@@ -2,8 +2,6 @@ package visao;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
-
-import dominio.Produto;
 import servico.ClasseProdutoServico;
 import dominio.ClasseProduto;
 
@@ -120,8 +118,6 @@ public class ClasseProdutoMenu extends BaseMenu {
         cp.setDescricao(descricao);
         cp.setDataDeInclusao(LocalDate.now());
 
-        //ClasseProduto cpnovo = this.srv.Adicionar(cp);
-
         if(this.srv.Adicionar(cp) != null){
             System.out.println("Classe de Produto adicionada com sucesso!");
         }
@@ -165,19 +161,18 @@ public class ClasseProdutoMenu extends BaseMenu {
                     ==================
                     """);
             }
-        }
-        else{
+        }else{
             System.out.println("""
                     =======ERRO=======
                      Classe de Produto
                      não encontrada!!
                     ==================
                     """);
+        }
 
         System.out.print("Clique ENTER para continuar. ");
         this.scanner.nextLine();
         this.scanner.nextLine();
-    }
 }
 
     @Override
@@ -203,7 +198,6 @@ public class ClasseProdutoMenu extends BaseMenu {
                     """);
             }
         }
-
         System.out.print("Clique ENTER para continuar. ");
         this.scanner.nextLine();
         this.scanner.nextLine();
