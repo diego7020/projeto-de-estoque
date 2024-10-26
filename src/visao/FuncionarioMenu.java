@@ -3,6 +3,7 @@ package visao;
 import java.util.ArrayList;
 import dominio.Funcionario;
 import servico.FuncionarioServico;
+import java.util.InputMismatchException;
 
 public class FuncionarioMenu extends BaseMenu {
 
@@ -85,9 +86,18 @@ public class FuncionarioMenu extends BaseMenu {
     public void Localizar() {
         Util.LimparConsole();
         System.out.println("Localizando funcionario.");
-
-        System.out.printf("Informe o codigo do funcionario: ");
-        int cod = this.scanner.nextInt();
+        int cod = 0;
+        boolean codigoValido = false;
+        while (!codigoValido) {
+            try {
+                System.out.printf("Informe o codigo do funcionario: ");
+                cod = this.scanner.nextInt();
+                codigoValido = true;
+            } catch (InputMismatchException e) {
+                System.out.println("\nErro! Formato não aceito. Entrada esperada: 000\n");
+                this.scanner.next();
+            }
+        }
 
         Funcionario cp = this.srv.Ler(cod);
 
