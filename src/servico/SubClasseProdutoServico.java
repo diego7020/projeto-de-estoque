@@ -2,39 +2,40 @@ package servico;
 
 import java.util.ArrayList;
 
-import dominio.SubclasseProduto;
-import repositorio.SubclasseProdutoRepo;
+import dominio.SubClasseProduto;
+import repositorio.SubClasseProdutoRepo;
 
-public class SubclasseProdutoServico extends BaseServico<SubclasseProduto> {
 
-    private SubclasseProdutoRepo repositorio;
+public class SubClasseProdutoServico extends BaseServico<SubClasseProduto> {
 
-    public SubclasseProdutoServico(){
-        this.repositorio = new SubclasseProdutoRepo();
+    private SubClasseProdutoRepo repositorio;
+
+    public SubClasseProdutoServico(){
+        this.repositorio = new SubClasseProdutoRepo();
     }
 
     @Override
-    public ArrayList<SubclasseProduto> Navegar() {
+    public ArrayList<SubClasseProduto> Navegar() {
         return this.repositorio.Browse();
     }
 
     @Override
-    public SubclasseProduto Ler(int chave) {
+    public SubClasseProduto Ler(int chave) {
         return this.repositorio.Read(chave);
     }
 
     @Override
-    public SubclasseProduto Editar(SubclasseProduto obj) {
+    public SubClasseProduto Editar(SubClasseProduto obj) {
         return this.repositorio.Edit(obj);
     }
 
     @Override
-    public SubclasseProduto Adicionar(SubclasseProduto obj) {
+    public SubClasseProduto Adicionar(SubClasseProduto obj) {
         return this.repositorio.Add(obj);
     }
 
     @Override
-    public SubclasseProduto Deletar(int chave) {
+    public SubClasseProduto Deletar(int chave) {
         return this.repositorio.Delete(chave);
     }
 

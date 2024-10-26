@@ -2,7 +2,7 @@ package dominio;
 
 import java.time.LocalDate;
 
-public class SubclasseProduto extends BaseParametro {
+public class SubClasseProduto extends BaseParametro {
     private int codigoClasse;
 
     public int getCodigoClasse() {
@@ -13,11 +13,11 @@ public class SubclasseProduto extends BaseParametro {
         this.codigoClasse = codigoClasse;
     }
 
-    public SubclasseProduto() {
+    public SubClasseProduto() {
         super();
     }
 
-    public SubclasseProduto(int codigo, String descricao, LocalDate dataDeInclusao, int codigoClasse) {
+    public SubClasseProduto(int codigo, String descricao, LocalDate dataDeInclusao, int codigoClasse) {
         super(codigo, descricao, dataDeInclusao);
         this.codigoClasse = codigoClasse;
     }

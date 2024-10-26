@@ -1,19 +1,19 @@
 package repositorio;
-import dominio.SubclasseProduto;
-import fakedb.SubclasseProdutoFakeDB;
+import dominio.SubClasseProduto;
+import fakedb.SubClasseProdutoFakeDB;
 
-public class SubclasseProdutoRepo extends BaseRepositorio<SubclasseProduto> {
+public class SubClasseProdutoRepo extends BaseRepositorio<SubClasseProduto> {
 
-    private SubclasseProdutoFakeDB db;
+    private SubClasseProdutoFakeDB db;
 
-    public SubclasseProdutoRepo(){
-        this.db = new SubclasseProdutoFakeDB();
+    public SubClasseProdutoRepo(){
+        this.db = new SubClasseProdutoFakeDB();
         this.dados = this.db.getTabelaSubClasse();
     }
 
     @Override
-    public SubclasseProduto Read(int chave) {
-        for (SubclasseProduto iteravel : dados) {
+    public SubClasseProduto Read(int chave) {
+        for (SubClasseProduto iteravel : dados) {
             if(chave == iteravel.getCodigo()){
                 return iteravel;
             }
@@ -22,8 +22,8 @@ public class SubclasseProdutoRepo extends BaseRepositorio<SubclasseProduto> {
     }
 
     @Override
-    public SubclasseProduto Edit(SubclasseProduto instancia) {
-        SubclasseProduto ler = this.Read(instancia.getCodigo());
+    public SubClasseProduto Edit(SubClasseProduto instancia) {
+        SubClasseProduto ler = this.Read(instancia.getCodigo());
         if(ler != null){
             ler.setDescricao(instancia.getDescricao());
             return ler;
@@ -32,8 +32,8 @@ public class SubclasseProdutoRepo extends BaseRepositorio<SubclasseProduto> {
     }
 
     @Override
-    public SubclasseProduto Add(SubclasseProduto instancia) {
-        SubclasseProduto adicionar = this.dados.getLast();
+    public SubClasseProduto Add(SubClasseProduto instancia) {
+        SubClasseProduto adicionar = this.dados.getLast();
         int proximo = adicionar.getCodigo() + 1;
         instancia.setCodigo(proximo);
         this.dados.add(instancia);
@@ -42,8 +42,8 @@ public class SubclasseProdutoRepo extends BaseRepositorio<SubclasseProduto> {
     }
 
     @Override
-    public SubclasseProduto Delete(int chave) {
-        SubclasseProduto ler = this.Read(chave);
+    public SubClasseProduto Delete(int chave) {
+        SubClasseProduto ler = this.Read(chave);
         if(ler != null){
             this.dados.remove(ler);
             return ler;

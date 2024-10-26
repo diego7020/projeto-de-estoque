@@ -30,7 +30,7 @@ public class FuncionarioRepositorio extends BaseRepositorio<Funcionario> {
             cp.setCargo(instancia.getCargo());
             cp.setSalario(instancia.getSalario());
             cp.setEmail(instancia.getEmail());
-            cp.setEmail(instancia.getTelefone());
+            cp.setTelefone(instancia.getTelefone());
             return cp;
         }else{
             return null;

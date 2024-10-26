@@ -1,30 +1,30 @@
 package visao;
-import servico.SubclasseProdutoServico;
+import servico.SubClasseProdutoServico;
 
 import java.util.ArrayList;
 
-import dominio.SubclasseProduto;
+import dominio.SubClasseProduto;
 
-public class SubclasseProdutoVisao {
+public class SubClasseProdutoVisao {
 
-    private SubclasseProdutoServico servico;
+    private SubClasseProdutoServico servico;
 
-    public SubclasseProdutoVisao(){
-        this.servico = new SubclasseProdutoServico();
+    public SubClasseProdutoVisao(){
+        this.servico = new SubClasseProdutoServico();
     }
 
-    public void Adicionar(SubclasseProduto add){
+    public void Adicionar(SubClasseProduto add){
         this.servico.Adicionar(add);
     }
 
     public void Exibir(){
-        ArrayList<SubclasseProduto> lista = this.servico.Navegar();
-        for (SubclasseProduto imprimir : lista) {
+        ArrayList<SubClasseProduto> lista = this.servico.Navegar();
+        for (SubClasseProduto imprimir : lista) {
             this.ImprimirPorLinha(imprimir);
         }
     }
 
-    private void ImprimirPorLinha(SubclasseProduto imprimir){
+    private void ImprimirPorLinha(SubClasseProduto imprimir){
         String mensagem = "";
         mensagem += "Codigo da Classe Pai: " + imprimir.getCodigoClasse() + " | ";
         mensagem += "Codigo da Sub Classe: " + imprimir.getCodigo() + " | ";
