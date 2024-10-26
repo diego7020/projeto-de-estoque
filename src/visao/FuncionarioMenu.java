@@ -85,33 +85,38 @@ public class FuncionarioMenu extends BaseMenu {
     @Override
     public void Localizar() {
         Util.LimparConsole();
-        System.out.println("Localizando funcionario.");
-        
-        int cod = 0;
-        boolean codigoValido = false;
-        
-        while (!codigoValido) {
-            try {
-                System.out.printf("Informe o codigo do funcionario: ");
-                cod = this.scanner.nextInt();
-                codigoValido = true;
-            } catch (InputMismatchException e) {
-                System.out.println("\nErro! Formato não aceito. Entrada esperada: 000\n");
-                this.scanner.next();
+        ArrayList<Funcionario> lista = this.srv.Navegar();
+        if (lista.size() == 0) {
+            System.out.println("Lista vaiza.");
+        }else{
+            System.out.println("Localizando funcionario.");
+            
+            int cod = 0;
+            boolean codigoValido = false;
+            
+            while (!codigoValido) {
+                try {
+                    System.out.printf("Informe o codigo do funcionario: ");
+                    cod = this.scanner.nextInt();
+                    codigoValido = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("\nErro! Formato não aceito. Entrada esperada: 000\n");
+                    this.scanner.next();
+                }
+            }
+
+            Funcionario cp = this.srv.Ler(cod);
+
+            if (cp != null) {
+                this.Imprimir(cp);            
+            }else{
+                System.out.println("Erro: Funcionário não encontrado.");
             }
         }
-
-        Funcionario cp = this.srv.Ler(cod);
-
-        if (cp != null) {
-            this.Imprimir(cp);            
-        }else{
-            System.out.println("Erro: Funcionário não encontrado.");
-        }
-
         System.out.println("Clique ENTER para continuar.");
         this.scanner.nextLine();
         this.scanner.nextLine();
+        
     }
 
     @Override
@@ -238,12 +243,10 @@ public class FuncionarioMenu extends BaseMenu {
         Funcionario cp = this.srv.Ler(cod); 
         
         if (cp != null) {
-            if (this.srv.Deletar(cod) != null) {
-                System.out.println("\nFuncinario removido com sucesso.");                
-            }
-            else{
-                System.out.println("\nErro: Funcionario não encontrado.");
-            }
+            this.srv.Deletar(cod);
+            System.out.println("\nFuncinario removido com sucesso.");                
+        }else{
+            System.out.println("\nErro: Funcionario não encontrado.");
         }
         System.out.print("\nClique ENTER para continuar. ");
         this.scanner.nextLine();
