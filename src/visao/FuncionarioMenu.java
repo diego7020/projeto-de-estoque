@@ -128,7 +128,7 @@ public class FuncionarioMenu extends BaseMenu {
         
         double salario = 0;
         boolean salarioValido = false;
-        
+
         while (!salarioValido) {
             try {
                 System.out.print("Informe o salario: ");
@@ -221,8 +221,19 @@ public class FuncionarioMenu extends BaseMenu {
         Util.LimparConsole();
         System.out.println("Removendo.");
         
-        System.out.printf("Informe o codigo do funcionario a ser removido: ");
-        int cod = this.scanner.nextInt();
+        int cod = 0;
+        boolean codigoValido = false;
+        
+        while (!codigoValido) {
+            try {
+                System.out.printf("Informe o codigo do funcionario a ser removido: ");
+                cod = this.scanner.nextInt();
+                codigoValido = true;
+            } catch (InputMismatchException e) {
+                System.out.printf("\nErro! Formato não aceito. Entrada esperada: 000\n");
+                this.scanner.next();
+            }
+        }
 
         Funcionario cp = this.srv.Ler(cod); 
         
