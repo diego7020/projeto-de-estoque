@@ -86,8 +86,10 @@ public class FuncionarioMenu extends BaseMenu {
     public void Localizar() {
         Util.LimparConsole();
         System.out.println("Localizando funcionario.");
+        
         int cod = 0;
         boolean codigoValido = false;
+        
         while (!codigoValido) {
             try {
                 System.out.printf("Informe o codigo do funcionario: ");
@@ -124,8 +126,19 @@ public class FuncionarioMenu extends BaseMenu {
         System.out.printf("Informe o Cargo: ");
         String cargo = this.scanner.nextLine();
         
-        System.out.print("Informe o salario: ");
-        double salario = this.scanner.nextDouble();
+        double salario = 0;
+        boolean salarioValido = false;
+        
+        while (!salarioValido) {
+            try {
+                System.out.print("Informe o salario: ");
+                salario = this.scanner.nextDouble();
+                salarioValido = true;
+            } catch (InputMismatchException e) {
+                System.out.println("\nErro! Formato não aceito. Entrada esperada: 000,00\n");
+                this.scanner.next();
+            }
+        }
 
         System.out.printf("Informe o email: ");
         this.scanner.nextLine();
@@ -166,9 +179,19 @@ public class FuncionarioMenu extends BaseMenu {
             String cargo = this.scanner.nextLine();
             cp.setCargo(cargo);
 
-            System.out.printf("Informe o novo salario: ");
-            double salario = this.scanner.nextDouble();
-            cp.setSalario(salario);
+            double salario = 0;
+            boolean salarioValido = false;
+            while (!salarioValido) {
+                try {
+                    System.out.printf("Informe o novo salario: ");
+                    salario = this.scanner.nextDouble();
+                    cp.setSalario(salario);
+                    salarioValido = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("\nErro! Formato não aceito. Entrada esperada: 000,00\n");
+                    this.scanner.next();
+                }
+            }
 
             System.out.printf("Informe o novo email: ");
             this.scanner.nextLine();
