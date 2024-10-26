@@ -17,9 +17,9 @@ public class FuncionarioMenu extends BaseMenu {
     @Override
     public void ExibirMenu() {
         
-        int opcao = 0;
+        String opcao = "0";
 
-        while (opcao != 9) {
+        while (opcao != "9") {
             Util.LimparConsole();
             System.out.println("Cadastro de funcionarios: ");
             System.out.println("1 - Listar");
@@ -29,35 +29,39 @@ public class FuncionarioMenu extends BaseMenu {
             System.out.println("5 - Remover");
             System.out.println("9 - Sair");
             System.out.print("Selecione uma opção: ");
-            opcao = this.scanner.nextInt();
+            opcao = this.scanner.next();
 
             switch (opcao) {
-                case 1:
+                case "1":
                     this.Listar();
                     break;
             
-                case 2:
+                case "2":
                     this.Localizar();
                     break;
                     
-                case 3:
+                case "3":
                     this.Adicionar();
                     break;
                 
-                case 4:
+                case "4":
                     this.Atualizar();
                     break;
                     
-                case 5:
+                case "5":
                     this.Remover();
                     break;
                 
-                case 9:
+                case "9":
                     System.out.println("Saindo...");
                     break;
                 
                 default:
+                    Util.LimparConsole();
                     System.out.println("Opção inválida.");
+                    System.out.print("\nClique ENTER para continuar... ");
+                    this.scanner.nextLine();
+                    this.scanner.nextLine();
                     break;
             }
         }
@@ -171,51 +175,57 @@ public class FuncionarioMenu extends BaseMenu {
     @Override
     public void Atualizar() {
         Util.LimparConsole();
-        System.out.println("Atualizando cadastro.");
-
-        System.out.printf("Informe o código do funcionario: ");
-        int cod = this.scanner.nextInt();
-
-        Funcionario cp = this.srv.Ler(cod);
-        if (cp != null) {
-            
-            System.out.print("Informe o novo cargo: ");
+        ArrayList<Funcionario> lista = this.srv.Navegar();
+        if (lista.size() == 0) {
+            System.out.println("Lista vaiza.");
             this.scanner.nextLine();
-            String cargo = this.scanner.nextLine();
-            cp.setCargo(cargo);
+        }else{
+            System.out.println("Atualizando cadastro.");
 
-            double salario = 0;
-            boolean salarioValido = false;
-            while (!salarioValido) {
-                try {
-                    System.out.printf("Informe o novo salario: ");
-                    salario = this.scanner.nextDouble();
-                    cp.setSalario(salario);
-                    salarioValido = true;
-                } catch (InputMismatchException e) {
-                    System.out.println("\nErro! Formato não aceito. Entrada esperada: 000,00\n");
-                    this.scanner.next();
+            System.out.printf("Informe o código do funcionario: ");
+            int cod = this.scanner.nextInt();
+
+            Funcionario cp = this.srv.Ler(cod);
+            if (cp != null) {
+                
+                System.out.print("Informe o novo cargo: ");
+                this.scanner.nextLine();
+                String cargo = this.scanner.nextLine();
+                cp.setCargo(cargo);
+
+                double salario = 0;
+                boolean salarioValido = false;
+                while (!salarioValido) {
+                    try {
+                        System.out.printf("Informe o novo salario: ");
+                        salario = this.scanner.nextDouble();
+                        cp.setSalario(salario);
+                        salarioValido = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("\nErro! Formato não aceito. Entrada esperada: 000,00\n");
+                        this.scanner.next();
+                    }
                 }
-            }
 
-            System.out.printf("Informe o novo email: ");
-            this.scanner.nextLine();
-            String email = this.scanner.nextLine();
-            cp.setEmail(email);
+                System.out.printf("Informe o novo email: ");
+                this.scanner.nextLine();
+                String email = this.scanner.nextLine();
+                cp.setEmail(email);
 
-            System.out.printf("Informe o novo telefone: ");
-            String telefone = this.scanner.nextLine();
-            cp.setTelefone(telefone);
+                System.out.printf("Informe o novo telefone: ");
+                String telefone = this.scanner.nextLine();
+                cp.setTelefone(telefone);
 
-            if (this.srv.Editar(cp) != null) {
-                System.out.println("\nAlteração realizada com sucesso.");                
+                if (this.srv.Editar(cp) != null) {
+                    System.out.println("\nAlteração realizada com sucesso.");                
+                }
+                else{
+                    System.out.println("\nErro: Alteração não realizada.");
+                }            
             }
             else{
-                System.out.println("\nErro: Alteração não realizada.");
-            }            
-        }
-        else{
-            System.out.println("\nErro: Funcionario não encontrado.");
+                System.out.println("\nErro: Funcionario não encontrado.");
+            }
         }
         System.out.print("\nClique ENTER para continuar.");
         this.scanner.nextLine();
@@ -224,29 +234,34 @@ public class FuncionarioMenu extends BaseMenu {
     @Override
     public void Remover() {
         Util.LimparConsole();
-        System.out.println("Removendo.");
-        
-        int cod = 0;
-        boolean codigoValido = false;
-        
-        while (!codigoValido) {
-            try {
-                System.out.printf("Informe o codigo do funcionario a ser removido: ");
-                cod = this.scanner.nextInt();
-                codigoValido = true;
-            } catch (InputMismatchException e) {
-                System.out.printf("\nErro! Formato não aceito. Entrada esperada: 000\n");
-                this.scanner.next();
-            }
-        }
-
-        Funcionario cp = this.srv.Ler(cod); 
-        
-        if (cp != null) {
-            this.srv.Deletar(cod);
-            System.out.println("\nFuncinario removido com sucesso.");                
+        ArrayList<Funcionario> lista = this.srv.Navegar();
+        if (lista.size() == 0) {
+            System.out.println("Lista vaiza.");
         }else{
-            System.out.println("\nErro: Funcionario não encontrado.");
+            System.out.println("Removendo.");
+            
+            int cod = 0;
+            boolean codigoValido = false;
+            
+            while (!codigoValido) {
+                try {
+                    System.out.printf("Informe o codigo do funcionario a ser removido: ");
+                    cod = this.scanner.nextInt();
+                    codigoValido = true;
+                } catch (InputMismatchException e) {
+                    System.out.printf("\nErro! Formato não aceito. Entrada esperada: 000\n");
+                    this.scanner.next();
+                }
+            }
+
+            Funcionario cp = this.srv.Ler(cod); 
+            
+            if (cp != null) {
+                this.srv.Deletar(cod);
+                System.out.println("\nFuncinario removido com sucesso.");                
+            }else{
+                System.out.println("\nErro: Funcionario não encontrado.");
+            }
         }
         System.out.print("\nClique ENTER para continuar. ");
         this.scanner.nextLine();
